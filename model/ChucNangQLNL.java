@@ -21,7 +21,7 @@ public class ChucNangQLNL {
     Scanner inputs = new Scanner(System.in);
 
     public void docfile2() {
-        String path = "Data\\NhanLuc_data\\CaLam.csv";
+        String path = "Data/NhanLuc_data/CaLam.csv";
         if (CALAM.isEmpty()) {
             try (BufferedReader bir = new BufferedReader(new FileReader(path))) {
                 bir.readLine();
@@ -105,7 +105,7 @@ public class ChucNangQLNL {
     }
 
     private void ghiVaoFile2(CaLam caLam) {
-        String path = "Data\\NhanLuc_data\\CaLam.csv";
+        String path = "Data/NhanLuc_data/CaLam.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             writer.write(String.format("%d,%s,%f",
                     caLam.getSoGioLam(), caLam.getLoaiCaLam(), caLam.getHeSoChamCong()));
@@ -179,7 +179,7 @@ public class ChucNangQLNL {
     }
 
     private void ghiLaiVaoFile2() {
-        String path = "Data\\NhanLuc_data\\CaLam.csv";
+        String path = "Data/NhanLuc_data/CaLam.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
 
@@ -263,13 +263,13 @@ public class ChucNangQLNL {
             if (nhanVienCanThem != null) {
                 caLamcanthemnhanvien.themThanhVien(nhanVienCanThem);
 
-                System.out.println("Da them nhan vien vao de an.");
+                System.out.println("Da them nhan vien vao ca lam.");
 
             } else {
                 System.out.println("Khong tim thay ma nhan vien co ma " + maNhanVien);
             }
         } else {
-            System.out.println("Khong tim thay ma de an co loai " + loaiCaLamcanthamnhanvien);
+            System.out.println("Khong tim thay ca lam co loai " + loaiCaLamcanthamnhanvien);
         }
     }
 
@@ -289,18 +289,18 @@ public class ChucNangQLNL {
         }
 
         if (calamCanHienThi != null) {
-            System.out.println("Danh sach nhan vien tham gia de an:");
+            System.out.println("Danh sach nhan vien tham gia ca lam:");
             List<NhanVien> danhSachNhanVien = calamCanHienThi.getcacNhanVienThamGia();
             for (NhanVien nhanVien : danhSachNhanVien) {
                 System.out.println(nhanVien.toString());
             }
         } else {
-            System.out.println("Khong tim thay ma de an co loai " + loaicalamCanHienThi);
+            System.out.println("Khong tim thay ca lam co loai " + loaicalamCanHienThi);
         }
     }
 
     public void docfile() {
-        String path = "Data\\NhanLuc_data\\dean.csv";
+        String path = "Data/NhanLuc_data/dean.csv";
 
         try (BufferedReader bir = new BufferedReader(new FileReader(path))) {
             String header = bir.readLine();
@@ -393,7 +393,7 @@ public class ChucNangQLNL {
     }
 
     private void ghiVaoFile(DeAn dean) {
-        String path = "Data\\NhanLuc_data\\dean.csv";
+        String path = "Data/NhanLuc_data/dean.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             writer.write(String.format("%s,%s,%s,%d",
                     dean.getMaDeAn(), dean.getTenDeAn(), dean.getNgayTao(), dean.getSoThanhVien()));
@@ -471,7 +471,7 @@ public class ChucNangQLNL {
     }
 
     private void ghiLaiVaoFile() {
-        String path = "Data\\NhanLuc_data\\dean.csv";
+        String path = "Data/NhanLuc_data/dean.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
 
@@ -488,6 +488,24 @@ public class ChucNangQLNL {
             System.out.println("Loi khi ghi vao file CSV: " + e.getMessage());
         }
     }
+    // private void ghiLaiVaoFile2() {
+    // String path = "Data/NhanLuc_data/CaLam.csv";
+
+    // try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+
+    // writer.write("sogiolam,loaicalam,hesochamcong");
+    // writer.newLine();
+
+    // for (CaLam caLam : CALAM) {
+    // String newData = String.format("%d,%s,%f",
+    // caLam.getSoGioLam(), caLam.getLoaiCaLam(), caLam.getHeSoChamCong());
+    // writer.write(newData);
+    // writer.newLine();
+    // }
+    // } catch (IOException e) {
+    // System.out.println("Loi khi ghi vao file CSV: " + e.getMessage());
+    // }
+    // }
 
     public void XoaDeAn() {
         docfile();
@@ -509,7 +527,7 @@ public class ChucNangQLNL {
         }
 
         if (!daXoa) {
-            System.out.println("Khong tim thay ca lam co loai " + maDeAnCanXoa + " de xoa.");
+            System.out.println("Khong tim thay ma de an " + maDeAnCanXoa + " de xoa.");
         }
     }
 
@@ -603,21 +621,21 @@ public class ChucNangQLNL {
     }
 
     public void docfile1() {
-        String path = "Data/NhanVien_data/NhanVien.csv";
+        String path = "Data/NhanVien_data/NV_ThongTin.csv";
         if (NHANVIEN.isEmpty()) {
             try (BufferedReader bir = new BufferedReader(new FileReader(path))) {
                 bir.readLine();
                 String line = bir.readLine();
                 while (line != null) {
                     List<String> result = getDeAnInfo(line);
-                    String MANV = result.get(0);
-                    String HoTen = result.get(1);
-                    String MaPhong = result.get(2);
-                    String ChucVu = result.get(3);
-                    String LoaiHD = result.get(4);
-                    String NgayKy = result.get(5);
-                    String NgayHH = result.get(6);
-                    String Gmail = result.get(7);
+                    String MANV = result.get(9);
+                    String HoTen = result.get(0);
+                    String MaPhong = result.get(10);
+                    String ChucVu = result.get(11);
+                    String LoaiHD = result.get(12);
+                    String NgayKy = result.get(13);
+                    String NgayHH = result.get(14);
+                    String Gmail = result.get(15);
 
                     NHANVIEN.add(new NhanVien(MANV, HoTen, MaPhong, ChucVu, LoaiHD, NgayKy, NgayHH, Gmail));
                     line = bir.readLine();

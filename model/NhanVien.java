@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NhanVien extends ConNguoi {
-    Scanner sc = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
     private String MaNV;
     private String MaPhong;
     private String ChucVu;
@@ -16,6 +16,7 @@ public class NhanVien extends ConNguoi {
     private double luongCb;
     private String timeUpdate;
     private List<DeAn> cacDeAnThamGia;
+    checkError check = new checkError();
 
     public List<DeAn> getCacDeAnThamGia() {
         return this.cacDeAnThamGia;
@@ -165,6 +166,15 @@ public class NhanVien extends ConNguoi {
         this.Gmail = nhanvien.Gmail;
     }
 
+    public String outList() {
+        return this.MaNV + "," + this.HoTen + "," + this.phongban.output() + "," + this.hopdong.output() + ","
+                + this.getGmail();
+    }
+
+    public void setMaPhong() {
+        phongban.check_setMaPhong();
+    }
+
     public void input() {
         check_setHoten();
         check_setMaNV();
@@ -184,9 +194,13 @@ public class NhanVien extends ConNguoi {
             if (check.nullInput(ten)) {
                 System.out.println("Khong duoc de trong ho ten");
             }
+            if (!check.checkHoTen(ten)) {
+                System.out.println("Ten Khong Duoc Chua Ky Tu Dac Biet");
+            }
+
             setHoTen(ten);
 
-        } while (check.nullInput(ten));
+        } while (check.nullInput(ten) || !check.checkHoTen(ten));
     }
 
     public void check_setMaNV() {

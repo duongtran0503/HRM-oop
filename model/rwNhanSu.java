@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class rwNhanSu {
-    String pathNV = "Data/NhanVien_data/NV.csv";
-    String pathHD = "Data/NhanVien_data/HD.csv";
-    String pathPB = "Data/NhanVien_data/PB.csv";
+    String pathNV = "Data/NhanSu_data/NV.csv";
+    String pathHD = "Data/NhanSu_data/HD.csv";
+    String pathPB = "Data/NhanSu_data/PB.csv";
     Scanner input = new Scanner(System.in);
     checkError check = new checkError();
 
@@ -35,7 +35,7 @@ public class rwNhanSu {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < kt; i++) {
                 if (nhanvien[i] != null) {
-                    bw.write(nhanvien[i].toString());
+                    bw.write(nhanvien[i].outList());
                     bw.newLine();
                 }
             }
@@ -53,7 +53,7 @@ public class rwNhanSu {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < kt; i++) {
                 if (hopdong[i] != null) {
-                    bw.write(hopdong[i].toString());
+                    bw.write(hopdong[i].output());
                     bw.newLine();
                 }
             }
@@ -71,7 +71,7 @@ public class rwNhanSu {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < kt; i++) {
                 if (phongban[i] != null) {
-                    bw.write(phongban[i].toString());
+                    bw.write(phongban[i].output());
                     bw.newLine();
                 }
             }
@@ -99,22 +99,31 @@ public class rwNhanSu {
 
             String line;
             int i = 0;
-
+            line = reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String txt[] = line.split("\\|");
-                nv = new NhanVien();
-                nv.setMaNV(txt[0]);
-                nv.setHoTen(txt[1]);
-                phong = new PhongBan();
-                phong.setMaPhongBan(txt[2]);
-                hopdong = new HopDong();
-                hopdong.setViTri(txt[3]);
-                hopdong.setLoaiHD(txt[4]);
-                hopdong.setNgayKiHD(txt[5]);
-                hopdong.setNgayHetHan(txt[6]);
-                nv.setGmail(txt[7]);
-                nhanvien[i] = new NhanVien(nv, hopdong, phong);
-                i++;
+                String[] txt = line.split(",");
+
+                if (txt.length >= 8) { // Kiểm tra số lượng phần tử trong mảng txt
+                    nv = new NhanVien();
+                    nv.setMaNV(txt[0]);
+                    nv.setHoTen(txt[1]);
+
+                    phong = new PhongBan();
+                    phong.setMaPhongBan(txt[2]);
+
+                    hopdong = new HopDong();
+                    hopdong.setViTri(txt[3]);
+                    hopdong.setLoaiHD(txt[4]);
+                    hopdong.setNgayKiHD(txt[5]);
+                    hopdong.setNgayHetHan(txt[6]);
+
+                    nv.setGmail(txt[7]);
+
+                    nhanvien[i] = new NhanVien(nv, hopdong, phong);
+                    i++;
+                } else {
+                    System.out.println("Dòng không hợp lệ: " + line);
+                }
             }
             System.out.println("-----Da Doc Du Lieu Tu File NhanVien-----");
             reader.close();
@@ -123,7 +132,6 @@ public class rwNhanSu {
             e.printStackTrace();
         }
         return nhanvien;
-
     }
 
     public HopDong[] ReadHopDong() {
@@ -138,7 +146,7 @@ public class rwNhanSu {
             String line;
             int i = 0;
             while ((line = reader.readLine()) != null) {
-                String txt[] = line.split("\\|");
+                String[] txt = line.split(",");
                 hd = new HopDong();
                 hd.setID(txt[0]);
                 hd.setLoaiHD(txt[1]);
@@ -171,7 +179,7 @@ public class rwNhanSu {
             String line;
             int i = 0;
             while ((line = reader.readLine()) != null) {
-                String txt[] = line.split("\\|");
+                String[] txt = line.split(",");
                 pb = new PhongBan();
                 pb.setMaPhongBan(txt[0]);
                 pb.setTenPhongBan(txt[1]);
@@ -188,4 +196,5 @@ public class rwNhanSu {
         }
         return phongban;
     }
+
 }

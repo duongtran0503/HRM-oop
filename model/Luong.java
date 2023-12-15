@@ -29,7 +29,7 @@ interface ArraysInterface1 {
 public class Luong implements ArraysInterface1 {
 
     String LuongfilePath = "Data\\TaiChinh_data\\Luong.csv";
-    String NhanVienfilePath = "Data\\NhanVien_data\\NhanVien.csv";
+    String NhanVienfilePath = "Data\\NhanVien_data\\NV_ThongTin.csv";
     String QuanLyfilePath = "Data\\TruongBan_data\\QuanLy.csv";
     ArrayList<String> list = new ArrayList<>();
 
@@ -236,7 +236,7 @@ public class Luong implements ArraysInterface1 {
     }
 
     private static double hienthithongtinLuong(String manvCanTinhLuong) {
-        try (BufferedReader nhanvienReader = new BufferedReader(new FileReader("Data\\NhanVien_data\\NhanVien.csv"));
+        try (BufferedReader nhanvienReader = new BufferedReader(new FileReader("Data\\NhanVien_data\\NV_ThongTin.csv"));
                 BufferedReader quanlyReader = new BufferedReader(new FileReader("Data\\TruongBan_data\\QuanLy.csv"));
                 BufferedReader luongReader = new BufferedReader(new FileReader("Data\\TaiChinh_data\\Luong.csv"))) {
             System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", "MANV", "Ho ten", "Ma Phong",
@@ -248,28 +248,28 @@ public class Luong implements ArraysInterface1 {
 
             while ((nhanvienLine = nhanvienReader.readLine()) != null) {
                 String[] nhanvienData = nhanvienLine.split(",");
-                String manvFromFile = nhanvienData[0].trim(); // Mã nhân viên từ file
+                String manvFromFile = nhanvienData[9].trim(); // Mã nhân viên từ file
 
                 if (manvCanTinhLuong.equals(manvFromFile)) {
-                    String hoten = nhanvienData[1].trim();
-                    String maPhong = nhanvienData[2].trim();
-                    String chucvu = nhanvienData[3].trim();
+                    String hoten = nhanvienData[0].trim();
+                    String maPhong = nhanvienData[10].trim();
+                    String chucvu = nhanvienData[11].trim();
                     String maluong = null;
                     String luongCoBan = null;
                     String luongKhenThuong = null;
                     String luongKiLuat = null;
                     while ((luongLine = luongReader.readLine()) != null) {
                         String[] luongData = luongLine.split(",");
-                        if (nhanvienData[0].trim().equals(luongData[5].trim())) {
+                        if (nhanvienData[9].trim().equals(luongData[5].trim())) {
                             maluong = luongData[0].trim();
-                            luongCoBan = nhanvienData[8].trim();
+                            luongCoBan = nhanvienData[16].trim();
                             break;
                         }
                     }
 
                     while ((quanlyLine = quanlyReader.readLine()) != null) {
                         String[] quanlyData = quanlyLine.split(",");
-                        if (nhanvienData[0].trim().equals(quanlyData[8].trim())) {
+                        if (nhanvienData[9].trim().equals(quanlyData[8].trim())) {
                             luongKhenThuong = quanlyData[6].trim();
                             luongKiLuat = quanlyData[7].trim();
                             break;
@@ -308,7 +308,7 @@ public class Luong implements ArraysInterface1 {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ma phong de in ra danh sach luong (pqt, pnl, pns, ptc, ptb): ");
         String maPhongCanTim = scanner.nextLine();
-        try (BufferedReader nhanvienReader = new BufferedReader(new FileReader("Data\\NhanVien_data\\NhanVien.csv"));
+        try (BufferedReader nhanvienReader = new BufferedReader(new FileReader("Data\\NhanVien_data\\NV_ThongTin.csv"));
                 BufferedReader quanlyReader = new BufferedReader(new FileReader("Data\\TruongBan_data\\QuanLy.csv"));
                 BufferedReader luongReader = new BufferedReader(new FileReader("Data\\TaiChinh_data\\Luong.csv"))) {
             System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", "MANV", "Ho ten", "Ma Phong",
@@ -320,28 +320,28 @@ public class Luong implements ArraysInterface1 {
 
             while ((nhanvienLine = nhanvienReader.readLine()) != null) {
                 String[] nhanvienData = nhanvienLine.split(",");
-                String maPhongFromFile = nhanvienData[2].trim(); // Mã nhân viên từ file
+                String maPhongFromFile = nhanvienData[10].trim(); // Mã nhân viên từ file
 
                 if (maPhongCanTim.equals(maPhongFromFile)) {
-                    String MANV = nhanvienData[0].trim();
-                    String hoten = nhanvienData[1].trim();
-                    String chucvu = nhanvienData[3].trim();
+                    String MANV = nhanvienData[9].trim();
+                    String hoten = nhanvienData[0].trim();
+                    String chucvu = nhanvienData[11].trim();
                     String maluong = null;
                     String luongCoBan = null;
                     String luongKhenThuong = null;
                     String luongKiLuat = null;
                     while ((luongLine = luongReader.readLine()) != null) {
                         String[] luongData = luongLine.split(",");
-                        if (nhanvienData[0].trim().equals(luongData[5].trim())) {
+                        if (nhanvienData[9].trim().equals(luongData[5].trim())) {
                             maluong = luongData[0].trim();
-                            luongCoBan = nhanvienData[8].trim();
+                            luongCoBan = nhanvienData[16].trim();
                             break;
                         }
                     }
 
                     while ((quanlyLine = quanlyReader.readLine()) != null) {
                         String[] quanlyData = quanlyLine.split(",");
-                        if (nhanvienData[0].trim().equals(quanlyData[8].trim())) {
+                        if (nhanvienData[9].trim().equals(quanlyData[8].trim())) {
                             luongKhenThuong = quanlyData[6].trim();
                             luongKiLuat = quanlyData[7].trim();
                             break;
@@ -353,35 +353,35 @@ public class Luong implements ArraysInterface1 {
                                 - Double.parseDouble(luongKiLuat);
                         switch (maPhongCanTim) {
                             case "pqt": // phong quan tri
-                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[2].trim())) {
+                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[10].trim())) {
                                     System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", MANV, hoten,
                                             maPhongFromFile, chucvu,
                                             maluong, luongCoBan, luongKhenThuong, luongKiLuat, tongLuong);
                                 }
                                 break;
                             case "pnl": // phong nhan luc
-                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[2].trim())) {
+                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[10].trim())) {
                                     System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", MANV, hoten,
                                             maPhongFromFile, chucvu,
                                             maluong, luongCoBan, luongKhenThuong, luongKiLuat, tongLuong);
                                 }
                                 break;
                             case "pns": // phong nhan su
-                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[2].trim())) {
+                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[10].trim())) {
                                     System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", MANV, hoten,
                                             maPhongFromFile, chucvu,
                                             maluong, luongCoBan, luongKhenThuong, luongKiLuat, tongLuong);
                                 }
                                 break;
                             case "ptc": // phong tai chinh
-                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[2].trim())) {
+                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[10].trim())) {
                                     System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", MANV, hoten,
                                             maPhongFromFile, chucvu,
                                             maluong, luongCoBan, luongKhenThuong, luongKiLuat, tongLuong);
                                 }
                                 break;
                             case "ptb": // phong truong ban
-                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[2].trim())) {
+                                if (maPhongCanTim.equalsIgnoreCase(nhanvienData[10].trim())) {
                                     System.out.printf("%-15s%-15s%-15s%-15s%-15s%-15s%-25s%-25s%-15s\n", MANV, hoten,
                                             maPhongFromFile, chucvu,
                                             maluong, luongCoBan, luongKhenThuong, luongKiLuat, tongLuong);

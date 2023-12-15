@@ -63,7 +63,7 @@ public class PhongBan {
             if (check.nullInput(maPhong)) {
                 System.out.println("Khong duoc de trong ma phong");
             } else if (!check.checkMaPhong(maPhong)) {
-                System.out.println("Ma Phong khong dung dinh dang (pxxxx) voi x la so");
+                System.out.println("Ma Phong khong dung dinh dang pns|ptc|pnl|pqt|ptb");
             } else {
                 setMaPhongBan(maPhong);
             }
@@ -89,7 +89,7 @@ public class PhongBan {
             if (check.nullInput(ngayThanhLap)) {
                 System.out.println("Khong duoc de trong ngay thanh lap");
             } else if (!check.dateFormat(ngayThanhLap)) {
-                System.out.println("Ngay Thanh Lap khong dung dinh dang (dd/mm/yyyy)");
+                System.out.println("Ngay Thanh Lap khong dung dinh dang (dd-mm-yyyy)");
             } else {
                 setNgayThanhLap(ngayThanhLap);
             }
@@ -103,6 +103,10 @@ public class PhongBan {
     }
 
     public String toString() {
-        return getMaPhongBan() + "|" + getTenPhongBan() + "|" + getNgayThanhLap();
+        return getMaPhongBan() + "," + getTenPhongBan() + "," + getNgayThanhLap();
+    }
+
+    public String output() {
+        return this.getMaPhongBan();
     }
 }

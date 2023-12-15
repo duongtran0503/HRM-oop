@@ -190,7 +190,7 @@ public class HopDong {
                 System.out.println("Vi Tri Khong Duoc De Trong");
             }
             if (!check.checkViTri(ViTri)) {
-                System.out.println("Chi Duoc Chon 1 Trong Hai Vi Tri 'NV' hoac 'QL'");
+                System.out.println("Chi Duoc Chon 1 Trong Cac Vi Tri NV|QT|NS|NL|TC|TB");
             }
             setViTri(ViTri);
         } while (check.nullInput(ViTri) || !check.checkViTri(ViTri));
@@ -198,8 +198,13 @@ public class HopDong {
     }
 
     public String toString() {
-        return getID() + "|" + getLoaiHD() + "|" + getNgayKiHD() + "|" + getNgayHetHan() + "|" + getLuongCB() + "|"
+        return getID() + "," + getLoaiHD() + "," + getNgayKiHD() + "," + getNgayHetHan() + "," + getLuongCB() + ","
                 + getViTri();
+    }
+
+    public String output() {
+        return getViTri() + "," + getLoaiHD() + "," + getNgayKiHD() + "," + getNgayHetHan();
+
     }
 
     public static void main(String[] args) {

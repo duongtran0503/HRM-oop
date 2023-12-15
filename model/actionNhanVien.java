@@ -37,7 +37,7 @@ public class actionNhanVien implements ArraysInterface {
     private void incre_Array() {
         int newKT = danhSachNhanVien.length * 2;
         NhanVien[] newArray = new NhanVien[newKT];
-        System.arraycopy(danhSachNhanVien, 0, newArray, 0, kt);
+        System.arraycopy(danhSachNhanVien, 0, newArray, 0, danhSachNhanVien.length);
         danhSachNhanVien = newArray;
     }
 
@@ -277,22 +277,23 @@ public class actionNhanVien implements ArraysInterface {
     @Override
     public void InDanhSach() {
         for (int i = 0; i < danhSachNhanVien.length; i++)
-            if (danhSachNhanVien[i] != null)
-                System.out.println(danhSachNhanVien[i].toString());
+            if (danhSachNhanVien[i] != null) {
+                System.out.println(danhSachNhanVien[i].outList());
+            }
     }
 
     public String toString() {
         for (int i = 0; i < danhSachNhanVien.length; i++)
             if (danhSachNhanVien[i] != null)
-                return danhSachNhanVien[i].toString();
+                return danhSachNhanVien[i].outList();
         return null;
     }
 
-    public static void main(String[] args) {
-        actionNhanVien a = new actionNhanVien();
-        a.ThemThongTin();
-        a.TimKiemThongTin();
-        a.InDanhSach();
-
-    }
+    // public static void main(String[] args) {
+    // actionNhanVien a = new actionNhanVien();
+    // a.ThemThongTin();
+    // a.TimKiemThongTin();
+    // a.InDanhSach();
+    //
+    // }
 }

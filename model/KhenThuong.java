@@ -16,7 +16,7 @@ public class KhenThuong implements ArraysInterface {
     ArrayList<String> list = new ArrayList<>();
     checkError check = new checkError();// check date
 
-    @Override // them thong tin khen thuong // check + fix loi trùng thong tin nhan vien
+    @Override // them thong tin khen thuong // check + fix loi trùng thong tin nhan vien // đã thêm mã nhân vien
     public void ThemThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ho ten: ");
@@ -40,6 +40,8 @@ public class KhenThuong implements ArraysInterface {
         System.out.print("Nhap luong khen thuong: ");
         String luongKhenThuong = scanner.nextLine();
         String luongKiLuat = "0";
+        System.out.println("Nhap ma nhan vien: ");
+        String maNV = scanner.nextLine();
         boolean nhanVienDaTonTai = false;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -55,17 +57,16 @@ public class KhenThuong implements ArraysInterface {
                     nhanVienDaTonTai = true;
                     System.out.println("Nhan vien da ton tai trong file. Thong tin se duoc cap nhat.");
                     line = hoTen + "," + maBoPhan + "," + maPhong + "," + chucVu + ","
-                            + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat;
+                            + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat + "," + maNV;
                 }
                 list.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        // neu chua co thong tin trung khop, them thong tin moi vao danh sach
+        }// neu chua co thong tin trung khop, them thong tin moi vao danh sach
         if (!nhanVienDaTonTai) {
             String newEntry = hoTen + "," + maBoPhan + "," + maPhong + "," + chucVu + ","
-                    + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat;
+                    + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat + "," + maNV;
             list.add(newEntry);
         }
         // ghi lại thong tin vao file
@@ -79,10 +80,9 @@ public class KhenThuong implements ArraysInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    @Override // xoa thong tin nhan vien khen thuong // check
+    @Override // xoa thong tin nhan vien khen thuong // check // ko thể xóa đc nhân viên cuối chuỗi
     public void XoaThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien can xoa: ");
@@ -124,11 +124,11 @@ public class KhenThuong implements ArraysInterface {
         }
     }
 
-    @Override // In danh sach nhan vien khen thuong // check
+    @Override // In danh sach nhan vien khen thuong // check //đã thêm mã nhân vien
     public void InDanhSach() {// doc tu file goc
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            System.out.printf("%-30s%-15s%-15s%-15s\n", "Ho Ten", "Ma Bo Phan", "Ma Phong", "Luong Khen Thuong");
+            System.out.printf("%-30s%-15s%-15s%-15s%-15s\n", "Ho Ten", "Ma Nhan Vien","Ma Bo Phan", "Ma Phong", "Luong Khen Thuong");
             // bo qua dong dau tien(ghi chu)
             reader.readLine();
             while ((line = reader.readLine()) != null) {
@@ -143,7 +143,8 @@ public class KhenThuong implements ArraysInterface {
                     String maBoPhan = data[1].trim();
                     String maPhong = data[2].trim();
                     String luongKhenThuong = data[6].trim();
-                    System.out.printf("%-30s%-15s%-15s%-15s\n", hoTen, maBoPhan, maPhong, luongKhenThuong);
+                    String maNV = data[8].trim();
+                    System.out.printf("%-30s%-15s%-15s%-15s%-15s\n", hoTen, maNV, maBoPhan, maPhong, luongKhenThuong);
                 }
             }
         } catch (IOException e) {
@@ -151,12 +152,11 @@ public class KhenThuong implements ArraysInterface {
         }
     }
 
-    @Override // chinh sua thong tin khen thuong // check
+    @Override // chinh sua thong tin khen thuong // check // đã thêm mã nhân viên
     public void ChinhSuaThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien can chinh sua: ");
         String hoTenToEdit = scanner.nextLine();
-        // doc tu file va xuat ra mang
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -164,8 +164,7 @@ public class KhenThuong implements ArraysInterface {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        // nhap thong tin vao mang
+        } // nhap thong tin vao mang
         boolean found = false;
         for (int i = 0; i < list.size(); i++) {
             String[] data = list.get(i).split(",");
@@ -192,9 +191,11 @@ public class KhenThuong implements ArraysInterface {
                 System.out.print("Luong khen thuong: ");
                 String newLuongKhenThuong = scanner.nextLine();
                 String newLuongKiLuat = data[7].trim();// luu lai thong tin ki luat khong chinh sua
+                System.out.println("Ma nhan vien: ");
+                String newMaNV = scanner.nextLine();
                 // cap nhat thong tin thay doi
                 list.set(i, newHoTen + "," + newMaBoPhan + "," + newMaPhong + "," + newChucVu + ","
-                        + newNgayDangKy + "," + newNgayHetHan + "," + newLuongKhenThuong + "," + newLuongKiLuat);
+                        + newNgayDangKy + "," + newNgayHetHan + "," + newLuongKhenThuong + "," + newLuongKiLuat + "," + newMaNV);
                 found = true;
                 break;
             }
@@ -216,26 +217,24 @@ public class KhenThuong implements ArraysInterface {
         }
     }
 
-    @Override // tiem kiem nhan vien khen thuong // check
+    @Override // tiem kiem nhan vien khen thuong // sửa đổi tìm kiếm //đã thêm manv
     public void TimKiemThongTin() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhap thong tin can tim ( ho ten/ ma bo phan/ ma phong): ");
+        System.out.println("Nhap thong tin can tim ( hoten / manv / mabophan / maphong / chucvu ): ");
         String timkiem = scanner.nextLine();
-        try {
-            // doc du lieu tu file goc
+        try {// doc du lieu tu file goc
             readDataFromFileAndSearch(timkiem);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-
     private void readDataFromFileAndSearch(String timkiem) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             // Bo qua dong dau tien
             if (scanner.hasNextLine()) {
                 scanner.nextLine();
             }
-            System.out.println("Result:");
+            System.out.println("Ket qua:");
             boolean found = false;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -245,16 +244,26 @@ public class KhenThuong implements ArraysInterface {
                 String maphong = data[2];
                 String chucvu = data[3];
                 String luongkhenthuong = data[6];
-                if (hoten.contains(timkiem)// tim kiem theo tieu chi
-                        || mabophan.equals(timkiem)
-                        || maphong.equals(timkiem)
-                        || chucvu.equals(timkiem)) {
+                String maNV = data[8].trim();
+                if (hoten.contains(timkiem) || maNV.equals(timkiem))// tim kiem theo 1 tieu chi -> 1 người
+                 {
                     System.out.println("Ho ten: " + hoten);
+                    System.out.println("Ma nhan vien: " + maNV);
                     System.out.println("Chuc vu: " + chucvu);
                     System.out.println("Luong khen thuong: " + luongkhenthuong);
                     System.out.println("------------------------");
                     found = true;
                     break;
+                } else if( mabophan.equals(timkiem) // tìm nhiều đối tượng
+                        || maphong.equals(timkiem)
+                        || chucvu.equals(timkiem))
+                {
+                    System.out.println("Ho ten: " + hoten);
+                    System.out.println("Ma nhan vien: " + maNV);
+                    System.out.println("Chuc vu: " + chucvu);
+                    System.out.println("Luong khen thuong: " + luongkhenthuong);
+                    System.out.println("------------------------");
+                    found = true;
                 }
             }
             if (!found) {

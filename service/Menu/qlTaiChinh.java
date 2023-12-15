@@ -51,28 +51,26 @@ public class qlTaiChinh {
                 System.out.println("---------------------------");
                 System.out.println("____________chuc nang tim kiem___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
+                // do {
+                // System.out.println("-------chon phong ban can thao tac--------");
+                // System.out.println("1.phong nhan su");
+                // System.out.println("2.phong tai chinh");
+                // System.out.println("3.phong nhan luc");
+                // System.out.println("4.truong ban");
+                // System.out.println("5.phong quan tri");
+                // System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
+                // System.out.print("nhap lua chon:");
+                // select = inputs.nextInt();
+                // if (select < 1 || select > 6) {
+                // System.out.println("-----------------------------------");
+                // System.out.println("loi lua chon vui long nhap lai");
+                // }
 
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:tim kiem");
+                // } while (select < 1 || select > 6);
+                // if (select == 6) {
+                // ChucNang();
+                // return;
+                // }
                 method.TimKiemThongTin();
                 do {
                     System.out.println("---------------------------------");
@@ -97,30 +95,8 @@ public class qlTaiChinh {
             }
             case 2: {
                 System.out.println("---------------------------");
-                System.out.println("____________chuc nang them xoa muc luong___________");
+                System.out.println("____________chuc nang them muc luong___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
-
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:them muc luong");
                 method.ThemThongTin();
                 do {
                     System.out.println("---------------------------------");
@@ -147,28 +123,6 @@ public class qlTaiChinh {
                 System.out.println("---------------------------");
                 System.out.println("____________chuc nang sua muc luong___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
-
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:sua muc luong");
                 method.ChinhSuaThongTin();
                 do {
                     System.out.println("---------------------------------");
@@ -195,28 +149,6 @@ public class qlTaiChinh {
                 System.out.println("---------------------------");
                 System.out.println("____________chuc nang xoa muc luong___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
-
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:xoa muc luong");
                 method.XoaThongTin();
                 do {
                     System.out.println("---------------------------------");
@@ -243,28 +175,6 @@ public class qlTaiChinh {
                 System.out.println("---------------------------");
                 System.out.println("____________chuc nang danh sach___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
-
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:in danh sach");
                 method.InDanhSach();
                 do {
                     System.out.println("---------------------------------");
@@ -291,28 +201,6 @@ public class qlTaiChinh {
                 System.out.println("---------------------------");
                 System.out.println("____________chuc nang tinh luong___________");
                 int select = 0;
-                do {
-                    System.out.println("-------chon phong ban can thao tac--------");
-                    System.out.println("1.phong nhan su");
-                    System.out.println("2.phong tai chinh");
-                    System.out.println("3.phong nhan luc");
-                    System.out.println("4.truong ban");
-                    System.out.println("5.phong quan tri");
-                    System.out.println("6. tro lai danh sach chuc nang quan ly tai chinh");
-                    System.out.print("nhap lua chon:");
-                    select = inputs.nextInt();
-                    if (select < 1 || select > 6) {
-                        System.out.println("-----------------------------------");
-                        System.out.println("loi lua chon vui long nhap lai");
-                    }
-
-                } while (select < 1 || select > 6);
-                if (select == 6) {
-                    ChucNang();
-                    return;
-                }
-                System.out.println("-----------------------");
-                System.out.println("chuc nang:tinh luong");
                 method.TinhLuong();
                 do {
                     System.out.println("---------------------------------");

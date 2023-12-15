@@ -16,7 +16,7 @@ public class KiLuat implements ArraysInterface {
     ArrayList<String> list = new ArrayList<>();
     checkError check = new checkError();
 
-    @Override // them thong tin nhan vien ki luat
+    @Override // them thong tin nhan vien ki luat // thêm mã nhân viên
     public void ThemThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ho ten: ");
@@ -40,6 +40,8 @@ public class KiLuat implements ArraysInterface {
         String luongKhenThuong = "0";
         System.out.print("Nhap luong ki luat: ");
         String luongKiLuat = scanner.nextLine();
+        System.out.println("Nhap ma nhan vien: ");
+        String maNV = scanner.nextLine();
         boolean nhanVienDaTonTai = false;
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -54,7 +56,7 @@ public class KiLuat implements ArraysInterface {
                     nhanVienDaTonTai = true;
                     System.out.println("Nhan vien da ton tai trong file. Thong tin se duoc cap nhat.");
                     line = hoTen + "," + maBoPhan + "," + maPhong + "," + chucVu + ","
-                            + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat;
+                            + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat + "," + maNV;
                 }
                 list.add(line);
             }
@@ -63,7 +65,7 @@ public class KiLuat implements ArraysInterface {
         }
         if (!nhanVienDaTonTai) {
             String newEntry = hoTen + "," + maBoPhan + "," + maPhong + "," + chucVu + ","
-                    + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat;
+                    + ngayDangKy + "," + ngayHetHan + "," + luongKhenThuong + "," + luongKiLuat + "," + maNV;
             list.add(newEntry);
         }
         // ghi lại thong tin vao file
@@ -79,7 +81,7 @@ public class KiLuat implements ArraysInterface {
         }
     }
 
-    @Override // xoa thong tin nhan vien ki luat
+    @Override // xoa thong tin nhan vien ki luat // ko xóa đc nhân viên cuối chuỗi
     public void XoaThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien can xoa: ");
@@ -122,11 +124,12 @@ public class KiLuat implements ArraysInterface {
         }
     }
 
-    @Override // In danh sach nhan vien ki luat
+    @Override // In danh sach nhan vien ki luat // đã thêm mã nhân viên
     public void InDanhSach() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            System.out.printf("%-30s%-15s%-15s%-15s\n", "Ho Ten", "Ma Bo Phan", "Ma Phong", "Luong Ki Luat");
+            System.out.printf("%-30s%-15s%-15s%-15s%-15s\n", "Ho Ten", "Ma Nhan Vien", "Ma Bo Phan", "Ma Phong",
+                    "Luong Ki Luat");
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 if (line.trim().isEmpty()) {
@@ -138,7 +141,8 @@ public class KiLuat implements ArraysInterface {
                     String maBoPhan = data[1].trim();
                     String maPhong = data[2].trim();
                     String luongkiluat = data[7].trim();
-                    System.out.printf("%-30s%-15s%-15s%-15s\n", hoTen, maBoPhan, maPhong, luongkiluat);
+                    String maNV = data[8].trim();
+                    System.out.printf("%-30s%-15s%-15s%-15s%-15s\n", hoTen, maNV, maBoPhan, maPhong, luongkiluat);
                 }
             }
         } catch (IOException e) {
@@ -146,7 +150,7 @@ public class KiLuat implements ArraysInterface {
         }
     }
 
-    @Override // chinh sua thong tin ki luat
+    @Override // chinh sua thong tin ki luat // đã thêm mã nhân viên
     public void ChinhSuaThongTin() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhap ten nhan vien can chinh sua: ");
@@ -185,8 +189,11 @@ public class KiLuat implements ArraysInterface {
                 String newLuongKhenThuong = data[6].trim();// luu lai thong tin luong khen thuong ko chinh sua
                 System.out.print("Luong ki luat: ");
                 String newLuongKiLuat = scanner.nextLine();
+                System.out.println("Ma nhan vien: ");
+                String newMaNV = scanner.nextLine();
                 list.set(i, newHoTen + "," + newMaBoPhan + "," + newMaPhong + "," + newChucVu + ","
-                        + newNgayDangKy + "," + newNgayHetHan + "," + newLuongKhenThuong + "," + newLuongKiLuat);
+                        + newNgayDangKy + "," + newNgayHetHan + "," + newLuongKhenThuong + "," + newLuongKiLuat + ","
+                        + newMaNV);
                 found = true;
                 break;
             }
@@ -207,13 +214,12 @@ public class KiLuat implements ArraysInterface {
         }
     }
 
-    @Override // tim kiem nhan vien ki luat
+    @Override // tim kiem nhan vien ki luat // thêm mã nhân viên
     public void TimKiemThongTin() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(
-                "Nhap thong tin can tim ( ho ten/ ma bo phan/ ma phong ): ");
+        System.out.println("Nhap thong tin can tim ( hoten / manv / mabophan / maphong / chucvu ): ");
         String timkiem = scanner.nextLine();
-        try {
+        try {// doc du lieu tu file goc
             readDataFromFileAndSearch(timkiem);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -235,16 +241,25 @@ public class KiLuat implements ArraysInterface {
                 String maphong = data[2];
                 String chucvu = data[3];
                 String luongkiluat = data[7];
-                if (hoten.contains(timkiem)// tim kiem theo tieu chi
-                        || mabophan.equals(timkiem)
-                        || maphong.equals(timkiem)
-                        || chucvu.equals(timkiem)) {
+                String maNV = data[8].trim();
+                if (hoten.contains(timkiem) || maNV.equals(timkiem))// tim kiem theo 1 tieu chi -> 1 người
+                {
                     System.out.println("Ho ten: " + hoten);
+                    System.out.println("Ma nhan vien: " + maNV);
                     System.out.println("Chuc vu: " + chucvu);
                     System.out.println("Luong ki luat: " + luongkiluat);
                     System.out.println("------------------------");
                     found = true;
                     break;
+                } else if (mabophan.equals(timkiem) // tìm nhiều đối tượng
+                        || maphong.equals(timkiem)
+                        || chucvu.equals(timkiem)) {
+                    System.out.println("Ho ten: " + hoten);
+                    System.out.println("Ma nhan vien: " + maNV);
+                    System.out.println("Chuc vu: " + chucvu);
+                    System.out.println("Luong ki luat: " + luongkiluat);
+                    System.out.println("------------------------");
+                    found = true;
                 }
             }
             if (!found) {

@@ -24,6 +24,8 @@ interface check {
     public boolean checkMaPhong(String input);
 
     public boolean checkLoaiHD(String input);
+
+    public boolean checkHoTen(String input);
 }
 
 public class checkError implements check {
@@ -36,6 +38,12 @@ public class checkError implements check {
     }
 
     @Override
+    public boolean checkHoTen(String input) {
+        String regex = "^[\\w\\s]*$";
+        return input.matches(regex);
+    }
+
+    @Override
     public boolean nullInput(String input) {
         return input.length() == 0;
     }
@@ -43,7 +51,7 @@ public class checkError implements check {
     @Override
     public boolean dateFormat(String input) {
         // dinh dang ngay thang dd/mm/yy vd:02-12-2023
-        return input.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})");
+        return input.matches("([0-9]{2})-([0-9]{2})-([0-9]{4})") || input.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})");
     }
 
     @Override
@@ -87,7 +95,7 @@ public class checkError implements check {
 
     @Override
     public boolean checkViTri(String input) {
-        return input.matches("NV|QL");
+        return input.matches("nhan vien|quan li|nhan su|nhan luc|tai chinh|truong ban");
     }
 
     @Override
@@ -97,7 +105,7 @@ public class checkError implements check {
 
     @Override
     public boolean checkMaPhong(String input) {
-        return input.matches("p\\d{4}");
+        return input.matches("pql|qnl|pns|ptb|ptc");
     }
 
     @Override
